@@ -1,5 +1,7 @@
 package com.duke.algorithmlib;
 
+import java.util.Random;
+
 public class BasicAIgorithm {
     private static final String TAG = "AI_BasicAIgorithm";
 
@@ -19,37 +21,151 @@ public class BasicAIgorithm {
 
     public static void main(String[] args) {
 
-
         System.out.println(TAG + " Hello AI main " + "args:" + args);
 
+        testBulble();
 
     }
 
-    private int getSum() {
-        return 0;
-    }
 
     /**
      * 冒泡排序
+     *
      * @param arrs
      * @return
      */
-    public static int[] bulbleSort(int[] arrs) {
-        if(arrs== null || arrs.length<=2) {
+    public static int[] insertSort(int[] arrs) {
+        if (arrs == null || arrs.length <= 2) {
             return arrs;
         }
 
         //從左往右
-        for (int i =0;i<arrs.length;i++){
-            //比较相邻2个元素大小
-            if(arrs[i] > arrs[i+1]) { //如果大于，交换
-
+        for (int i = 0; i < arrs.length - 1; i++) {
+            System.out.println("arr_i[" + i + "]=" + arrs[i]);
+            for (int j = i + 1; j < arrs.length; j++) {
+                System.out.println("arr_j[" + j + "]=" + arrs[j]);
+                //比较相邻2个元素大小
+                if (arrs[i] > arrs[j]) { //如果大于，交换
+                    int temp = arrs[i];
+                    arrs[i] = arrs[j];
+                    arrs[j] = temp;
+                }
             }
+            printArray(arrs);
 
         }
 
+        return arrs;
+    }
 
-        return null;
+    /**
+     * 冒泡排序
+     *时间复杂度 O(n^2)
+     * @param arrs
+     * @return
+     */
+    public static int[] bulbleSort(int[] arrs) {
+        if (arrs == null || arrs.length <= 2) {
+            return arrs;
+        }
+
+        //從左往右
+        for (int i = 0; i < arrs.length - 1; i++) {
+            System.out.println("arr_i[" + i + "]=" + arrs[i]);
+            for (int j = 0; j < arrs.length - i - 1; j++) {
+                System.out.println("arr_j[" + j + "]=" + arrs[j]);
+                //比较相邻2个元素大小
+                if (arrs[j] > arrs[j + 1]) { //如果大于，交换
+                    int temp = arrs[j];
+                    arrs[j] = arrs[j + 1];
+                    arrs[j + 1] = temp;
+                }
+            }
+            printArray(arrs);
+
+
+        }
+
+        return arrs;
+    }
+
+    public static void testBulble() {
+//        int[] grade = {78, 65, 89, 44, -55, 55, 60, 30};
+//
+//        int[] gradeSort = insertSort(grade);
+//        printArray(gradeSort, "gradeSort");
+
+//        int[] bubleSort = bulbleSort(grade);
+//        printArray(bubleSort, "bubleSort");
+
+        int[] datas = generateArray();
+        printArray(datas);
+        bulbleSort(datas);
+        printArray(datas);
+
+    }
+
+    public static int[] generateArray() {
+        int[] datas = new int[100];
+        for (int i = 0; i < datas.length; i++) {
+            int randomInt = (int) (new Random().nextFloat() * 1000);
+            datas[i] = randomInt;
+        }
+        return datas;
+    }
+
+    /**
+     *
+     */
+    public static void swapElement(int a, int b) {
+
+    }
+
+    public static void printArray(int[] array) {
+        printArray(array, null);
+    }
+
+    public static void printArray(int[] array, String arrayDescrip) {
+        if (array == null || array.length < 1) {
+            System.out.println("array may be null or size <1 ");
+            return;
+        }
+        if (arrayDescrip != null) {
+            System.out.print("array_" + arrayDescrip + "= ");
+            for (int i = 0; i < array.length; i++) {
+                System.out.print(array[i] + ", ");
+            }
+            System.out.println(" ");
+        } else {
+            for (int i = 0; i < array.length; i++) {
+                System.out.print(array[i] + ", ");
+            }
+            System.out.println(" ");
+        }
+
+    }
+
+    public static void printlnArray(int[] array) {
+        printlnArray(array, null);
+    }
+
+    public static void printlnArray(int[] array, String arrayDescrip) {
+        if (array == null || array.length < 1) {
+            System.out.println("array may be null or size <1 ");
+            return;
+        }
+        if (arrayDescrip != null) {
+            for (int i = 0; i < array.length; i++) {
+
+                System.out.println("array_" + arrayDescrip + "[" + i + "]=" + array[i] + " ,");
+            }
+        } else {
+            for (int i = 0; i < array.length; i++) {
+
+                System.out.println("array[" + i + "]=" + array[i] + " ,");
+            }
+        }
+
     }
 
 
