@@ -29,12 +29,10 @@ public class BasicAIgorithm {
 
 
     /**
-     * 冒泡排序
-     *
      * @param arrs
      * @return
      */
-    public static int[] insertSort(int[] arrs) {
+    public static int[] insertSort2(int[] arrs) {
         if (arrs == null || arrs.length <= 2) {
             return arrs;
         }
@@ -60,7 +58,8 @@ public class BasicAIgorithm {
 
     /**
      * 冒泡排序
-     *时间复杂度 O(n^2)
+     * 时间复杂度 O(n^2)
+     *
      * @param arrs
      * @return
      */
@@ -89,6 +88,54 @@ public class BasicAIgorithm {
         return arrs;
     }
 
+
+    /**
+     * 插入排序
+     *
+     * @param arrs
+     * @return
+     */
+    public static int[] insertSort(int[] arrs) {
+        if (arrs == null || arrs.length <= 2) {
+            return arrs;
+        }
+
+        //從左往右
+        for (int i = 0; i < arrs.length - 1; i++) {
+            System.out.println("arr_i[" + i + "]=" + arrs[i]);
+            for (int j = i + 1; j > 0; j--) {
+                System.out.println("arr_j[" + j + "]=" + arrs[j]);
+                // 与左边的比较 相邻2个元素大小
+                //从小到大排序 如果小于，交换
+                if (arrs[j] > arrs[j - 1]) {
+                    swapElement(arrs, j, j - 1);
+                }
+                //从大到小排序 ：如果大于，交换
+//                if (arrs[j] > arrs[j - 1]) {
+//                    swapElement(arrs, j, j - 1);
+//                }
+            }
+            printArray(arrs);
+
+        }
+
+        return arrs;
+    }
+
+    /**
+     * 交换元素
+     *
+     * @param arr
+     * @param i
+     * @param j
+     */
+    public static void swapElement(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+
     public static void testBulble() {
 //        int[] grade = {78, 65, 89, 44, -55, 55, 60, 30};
 //
@@ -98,28 +145,37 @@ public class BasicAIgorithm {
 //        int[] bubleSort = bulbleSort(grade);
 //        printArray(bubleSort, "bubleSort");
 
-        int[] datas = generateArray();
+//        int[] datas = generateArray(100);
+        int[] datas = generateRandomArray(10, 100);
         printArray(datas);
-        bulbleSort(datas);
+//        bulbleSort(datas);
+        insertSort(datas);
         printArray(datas);
 
     }
 
-    public static int[] generateArray() {
-        int[] datas = new int[100];
+    public static int[] generateArray(int size) {
+        int[] datas = new int[size];
         for (int i = 0; i < datas.length; i++) {
-            int randomInt = (int) (new Random().nextFloat() * 1000);
+            int randomInt = (int) (new Random().nextDouble() * 10000);
             datas[i] = randomInt;
         }
         return datas;
     }
 
-    /**
-     *
-     */
-    public static void swapElement(int a, int b) {
-
+    public static int[] generateRandomArray(int size, int randomValue) {
+        int[] datas = new int[size];
+        //随机数 Math.random() --> [0,1)
+        //int value = (int)((value + 1) * (Math.random()));   --> [0,value]之间的整数
+        Random random = new Random();
+        for (int i = 0; i < datas.length; i++) {
+            int value = (int) ((randomValue + 1) * (random.nextDouble()));
+//            System.out.print(value + " ");
+            datas[i] = value;
+        }
+        return datas;
     }
+
 
     public static void printArray(int[] array) {
         printArray(array, null);
